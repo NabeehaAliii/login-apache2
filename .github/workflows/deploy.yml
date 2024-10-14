@@ -34,6 +34,7 @@ jobs:
           cd login-apache2
           npm install
           npm run build
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/login-apache2
           sudo chown -R www-data:www-data /home/ubuntu/login-apache2/build
           sudo chmod -R 755 /home/ubuntu/login-apache2/build
           sudo systemctl restart apache2
