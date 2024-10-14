@@ -13,7 +13,7 @@ jobs:
       EC2_IP: ${{ secrets.EC2_IP }}
       EC2_USER: ${{ secrets.EC2_USER }}
       EC2_KEY: ${{ secrets.EC2_KEY }}
-      REPO_URL: https://github.com/NabeehaAliii/login-apache2.git
+     
 
     steps:
     - name: Checkout Code
@@ -30,7 +30,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_IP << 'EOF'
           cd /home/ubuntu
           sudo rm -rf login-apache2
-          git clone $REPO_URL
+          git clone https://github.com/NabeehaAliii/login-apache2.git
           cd login-apache2
           npm install
           npm run build
