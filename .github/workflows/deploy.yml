@@ -28,9 +28,9 @@ jobs:
       run: |
         echo "Connecting to EC2 and deploying fresh code..."
         ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_IP << 'EOF'
-          sudo rm -rf /home/ubuntu/login-apache2
-          git clone $REPO_URL /home/ubuntu/login-apache2
-          cd /home/ubuntu/login-apache2 || exit
+          sudo rm -rf /home/$EC2_USER/login-apache2
+          git clone $REPO_URL /home/$EC2_USER/login-apache2
+          cd /home/$EC2_USER/login-apache2 || exit
           npm install
           npm run build
           sudo systemctl restart apache2
