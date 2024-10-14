@@ -5,8 +5,8 @@ function App() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 to-indigo-200 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md p-10 space-y-8 bg-white rounded-3xl shadow-lg sm:max-w-lg">
-        <h2 className="text-2xl font-extrabold text-center text-gray-800 sm:text-3xl">
-          Welcome Back
+        <h2 className="text-xl font-extrabold text-center text-gray-800 sm:text-3xl">
+          Login Page
         </h2>
         <form className="space-y-6">
           <div>
