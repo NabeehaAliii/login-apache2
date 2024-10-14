@@ -11,6 +11,16 @@ function App() {
         <form className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-gray-600">
+              Username
+            </label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 mt-2 text-gray-700 border rounded-full focus:ring-blue-400 focus:border-blue-400 outline-none bg-blue-50"
+              placeholder="Enter your username"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-600">
               Email Address
             </label>
             <input
@@ -37,7 +47,7 @@ function App() {
           </button>
         </form>
         <p className="text-center text-sm text-gray-500">
-          Don’t have an account?{" "}
+          Don’t have an account?{' '}
           <a href="#" className="font-medium text-blue-600 hover:underline">
             Sign up here
           </a>

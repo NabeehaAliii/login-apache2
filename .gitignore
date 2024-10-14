@@ -6,7 +6,6 @@
 .pnp.js
 .dockerignore
 Dockerfile
-.github/workflows/DeployDockerEC2.yml
 
 # testing
 /coverage
