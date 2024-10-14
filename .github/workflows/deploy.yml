@@ -1,30 +1,35 @@
-name: Deploy React App on Apache2 Server
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main  # Trigger workflow on push to the main branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      EC2_IP: ${{ secrets.EC2_IP }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+      EC2_KEY: ${{ secrets.EC2_KEY }}
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v2
 
-      - name: SSH into EC2 and Pull Latest Changes
-        env:
-          HOST: ${{ secrets.EC2_HOST }}
-          USER: ${{ secrets.EC2_USER }}
-          KEY: ${{ secrets.EC2_KEY }}
+    - name: Add SSH Key
+      run: |
+        echo "$EC2_KEY" > ec2_key.pem
+        chmod 600 ec2_key.pem 
 
-        run: |
-          echo "Connecting to EC2 and pulling changes..."
-          ssh -o StrictHostKeyChecking=no -i $KEY $USER@$HOST << 'EOF'
-            cd /home/ubuntu/login-apache2 || exit
-            git pull origin main  # Pull the latest code
-            npm install  # Ensure dependencies are installed (if needed)
-            npm run build  # Build the React app
-            sudo systemctl restart apache2  # Restart Apache
-          EOF
+    - name: SSH into EC2 and Pull Latest Changes
+      run: |
+        echo "Connecting to EC2 and pulling changes..."
+        ssh -o StrictHostKeyChecking=no -i ec2_key.pem $EC2_USER@$EC2_IP << 'EOF'
+          cd /home/ubuntu/login-apache2 || exit
+          git pull origin main  
+          npm install  
+          npm run build  
+          sudo systemctl restart apache2  
+        EOF
